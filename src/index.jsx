@@ -1,12 +1,12 @@
 import React from 'react';
 
-var ESC_KEY = 27;
-var ENTER_KEY = 13;
-var COMMA_KEY = 188;
-var TAB_KEY = 9;
-var SPACE_KEY = 0;
-var SPACE1_KEY = 32;
-var BACKSPACE_KEY = 8;
+const ESC_KEY = 27;
+const ENTER_KEY = 13;
+const COMMA_KEY = 188;
+const TAB_KEY = 9;
+const SPACE_KEY = 0;
+const SPACE1_KEY = 32;
+const BACKSPACE_KEY = 8;
 
 var Tag = React.createClass({
   render() {
