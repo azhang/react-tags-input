@@ -12,7 +12,9 @@ var Tag = React.createClass({
     var {tag, onRemove} = this.props;
 
     return (
-      <div onClick={onRemove}>{tag}</div>
+      <li className="tags-input-item" onClick={onRemove}>
+        <a>{tag}</a>
+      </li>
     );
   }
 });
@@ -62,13 +64,13 @@ export default React.createClass({
     var {tags} = this.props;
 
     return (
-      <div>
-        <div>
+      <div className="tags-input-container">
+        <ul className="tags-input-list">
           {tags.map( tag => 
             <Tag tag={tag} onRemove={this.onRemove.bind(this, tag)} key={tag} />
           )}
-        </div>
-        <div>
+        </ul>
+        <div className="tags-input-input">
           <input type="text" ref="userInput"
             value={this.state.userInput}
             onKeyDown={this.handleKeydown} 
