@@ -6,15 +6,17 @@ var COMMA_KEY = 188;
 var TAB_KEY = 9;
 var SPACE_KEY = 0;
 var SPACE1_KEY = 32;
+var BACKSPACE_KEY = 8;
 
 var Tag = React.createClass({
   render() {
-    var {tag, onRemove} = this.props;
+    var {tag, handleRemove} = this.props;
 
     return (
-      <li className="tags-input-item" onClick={onRemove}>
-        <a>{tag}</a>
-      </li>
+      <span className="tags-input-item">
+        <span>{tag}  </span>
+        <a title="Remove tag" onClick={handleRemove}>x</a>
+      </span>
     );
   }
 });
@@ -25,7 +27,7 @@ export default React.createClass({
     return {userInput: ''};
   },
 
-  onRemove(tag) {
+  handleRemove(tag) {
     this.props.removeTag(tag);
   },
 
@@ -41,15 +43,26 @@ export default React.createClass({
 
     var keys = [ESC_KEY, ENTER_KEY, COMMA_KEY, TAB_KEY, SPACE_KEY, SPACE1_KEY];
 
-    if (-1 !== keys.indexOf(charCode)) {
+    if ( -1 !== keys.indexOf(charCode) ) {
       e.preventDefault();
       this.addTag(this.state.userInput);
       this.clearAndFocusInput();
+    }
+
+    // Delete the last tag if backspace is pressed
+    if ( charCode === BACKSPACE_KEY
+      && this.state.userInput.length === 0) {
+      this.handleRemove(this.props.tags[this.props.tags.length-1]);
     }
   },
 
   handleChange(e) {
     this.setState({userInput: e.target.value});      
+  },
+
+  handleClick(e) {
+    console.log("asdfasdfasdfads");
+    this.refs.userInput.getDOMNode().focus();
   },
 
   clearAndFocusInput() {
@@ -64,18 +77,22 @@ export default React.createClass({
     var {tags} = this.props;
 
     return (
-      <div className="tags-input-container">
-        <ul className="tags-input-list">
+      <div className="tags-input-container" onClick={this.handleClick}>
+        <div className="tags-input-list">
           {tags.map( tag => 
-            <Tag tag={tag} onRemove={this.onRemove.bind(this, tag)} key={tag} />
+            <Tag tag={tag} 
+              key={tag}
+              handleRemove={this.handleRemove.bind(this, tag)} />
           )}
-        </ul>
-        <div className="tags-input-input">
-          <input type="text" ref="userInput"
+        </div>
+        <div>
+          <input type="text" ref="userInput"  
+            className="tags-input-input"
             value={this.state.userInput}
             onKeyDown={this.handleKeydown} 
             onChange={this.handleChange} /> 
         </div>
+        <div className="tags_clear"></div>
       </div>
     );
   }
