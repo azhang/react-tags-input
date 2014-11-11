@@ -2,6 +2,7 @@
   "name": "react-tags-input",
   "description": "React component for tags input.",
   "version": "0.0.1",
+  "main": "./dist/react-tags-input.js",
   "devDependencies": {
     "browserify": "^6.3.2",
     "es6ify": "^1.5.1",
