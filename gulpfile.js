@@ -26,5 +26,5 @@ gulp.task('test', function() {
   return bundler.bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source('react-tags-input.js'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('test/compiled'));
 });
