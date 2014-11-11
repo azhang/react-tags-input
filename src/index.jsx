@@ -43,15 +43,17 @@ export default React.createClass({
 
     var keys = [ESC_KEY, ENTER_KEY, COMMA_KEY, TAB_KEY, SPACE_KEY, SPACE1_KEY];
 
+    // Store tag when delimeter is detected
     if ( -1 !== keys.indexOf(charCode) ) {
       e.preventDefault();
-      this.addTag(this.state.userInput);
+      if (this.state.userInput.length !== 0)
+        this.addTag(this.state.userInput);
       this.clearAndFocusInput();
     }
 
     // Delete the last tag if backspace is pressed
     if ( charCode === BACKSPACE_KEY
-      && this.state.userInput.length === 0) {
+      && this.state.userInput.length === 0 ) {
       this.handleRemove(this.props.tags[this.props.tags.length-1]);
     }
   },
@@ -61,7 +63,6 @@ export default React.createClass({
   },
 
   handleClick(e) {
-    console.log("asdfasdfasdfads");
     this.refs.userInput.getDOMNode().focus();
   },
 

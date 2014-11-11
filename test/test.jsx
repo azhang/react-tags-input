@@ -23,10 +23,13 @@ var TestApp = React.createClass({
 
   render() {
     return (
+      <div>
       <TagsInput 
         tags={this.state.tags} 
         removeTag={this.removeTag} 
         addTag={this.addTag} /> 
+      {JSON.stringify(this.state.tags)}
+      </div>
     );
   }
 });
